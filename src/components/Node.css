@@ -13,6 +13,10 @@
 {
     background-color: red;
 }
+.iswall
+{
+  background-color: black;
+}
 
 .node-visited {
     animation-name: visitedAnimation;
@@ -28,22 +32,22 @@
   @keyframes visitedAnimation {
     0% {
       transform: scale(0.3);
-      background-color: rgba(0, 0, 66, 0.75);
+      background-color: #e43f84;
       border-radius: 10%;
     }
   
     50% {
-      background-color: peachpuff;
+      background-color: #db748d;
     }
   
     75% {
       transform: scale(1.2);
-      background-color: peachpuff;
+      background-color: #d03772;
     }
   
     100% {
       transform: scale(1);
-      background-color: peachpuff;
+      background-color: #e4c5a7;
     }
   }
   

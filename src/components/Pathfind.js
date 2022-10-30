@@ -4,7 +4,7 @@ import Astar from "../astarAlgo/astar";
 import "./Pathfind.css";
 
 const cols = 25;
-const rows = 15;
+const rows = 10;
 
 const NODE_START_ROW = 0;
 const NODE_START_COL = 0;
@@ -33,6 +33,8 @@ const Pathfind = () => {
     const startNode = grid[NODE_START_ROW][NODE_START_COL];
     const endNode = grid[NODE_END_ROW][NODE_END_COL];
     let path = Astar(startNode, endNode);
+    startNode.isWall = false;
+    endNode.isWall = false;
     setPath(path.path);
     setVisitedNodes(path.visitedNodes);
   };
@@ -66,6 +68,11 @@ const Pathfind = () => {
     this.f = 0;
     this.h = 0;
     this.neighbour = [];
+    this.isWall = false;
+
+    if (Math.random(1) < 0.2) {
+      this.isWall = true;
+    }
     this.previous = undefined;
     this.addneighbour = function (grid) {
       let i = this.x;
@@ -85,7 +92,7 @@ const Pathfind = () => {
         return (
           <div key={rowIndex} className="rowWrapper">
             {row.map((col, colIndex) => {
-              const { isStart, isEnd } = col;
+              const { isStart, isEnd, isWall } = col;
               return (
                 <Node
                   key={colIndex}
@@ -93,6 +100,7 @@ const Pathfind = () => {
                   isEnd={isEnd}
                   row={rowIndex}
                   col={colIndex}
+                  isWall={isWall}
                 ></Node>
               );
             })}
@@ -131,9 +139,15 @@ const Pathfind = () => {
   };
   return (
     <div className="Wrapper">
-      <button onClick={visualizepath}>VisuVisu</button>
-      <h1>PathFinder Visualizer</h1>
-      {gridWithNode}
+      <div className="main"> 
+      <h1>Pathfinder Visualizer</h1>
+      </div>
+      <div className="button">
+      <button onClick={visualizepath}>Visualize</button>
+      </div>
+     <div className="grid">
+     {gridWithNode}
+     </div>
     </div>
   );
 };
